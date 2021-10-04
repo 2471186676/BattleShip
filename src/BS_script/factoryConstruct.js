@@ -43,5 +43,22 @@ const ship = (size, direction, x, y) => {
 	return { body, direction, getHealth, getHit, x , y };
 };
 
+const checkPlacement = (board, size, direction, x, y) =>{
+	let check = false;
+	//not out of bound
+	switch(direction){
+		case "u":
+			break;
+		case "r":
+			break;
+		case "d":
+			break;
+		case "l":
+			break;
+	}
 
-export {gameBoard};
+	return false;
+}
+
+
+export {gameBoard, ship, checkPlacement};

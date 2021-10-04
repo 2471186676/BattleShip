@@ -10,23 +10,23 @@ body{
     flex-wrap: wrap;
 
     height: 500px;
-    width: 50%;
+    width: 500px;
     padding: 10px;
 
-    border: 1px black solid;
+    border: 1px #C05746 solid;
 }
 
 .block{
     background-color: #3A606E;
-    width: 10%;
-    height: 10%;
+    width: 50px;
+    height: 50px;
     padding: 0;
     margin: 0;
 
-    border: 0.5px black solid;
+    border: 1px #C05746 solid;
     box-sizing: border-box;
 }
 
 .block:hover{
-    background-color: rgb(103, 183, 212)
+    background-color: #477788
 }
