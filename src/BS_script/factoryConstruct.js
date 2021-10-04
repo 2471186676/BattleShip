@@ -40,25 +40,27 @@ const ship = (size, direction, x, y) => {
 		return health;
 	};
 
-	return { body, direction, getHealth, getHit, x , y };
+	return { body, direction, getHealth, getHit, x, y };
 };
 
-const checkPlacement = (board, size, direction, x, y) =>{
-	let check = false;
-	//not out of bound
+const updateBoard = (gameBoard, ship) =>{
+	let x = ship.x;
+	let y = ship.y
+	let direction = ship.direction;
+	let body = ship.body;
+
 	switch(direction){
-		case "u":
+		case "row":
+			for(let i = 0; i < body.length; i++){
+				gameBoard.board[x-i][y] = body.length;
+			}
 			break;
-		case "r":
-			break;
-		case "d":
-			break;
-		case "l":
+		case "column":
+			for(let i = 0; i < body.length; i++){
+				gameBoard.board[x][y-1] = body.length;
+			}
 			break;
 	}
-
-	return false;
 }
 
-
-export {gameBoard, ship, checkPlacement};
+export { gameBoard, ship, updateBoard };

@@ -1,9 +1,7 @@
-import { createBoard, createDragableShip, addShip } from "./BS_script/grid";
+import { createBoard, createDragableShip, addShip , createGameBoard} from "./BS_script/grid";
 import { gameBoard, ship } from "./BS_script/factoryConstruct";
 
-let board1 = gameBoard(10, "as");
-const gameBoard1 = document.getElementById("gameBoard1");
-gameBoard1.appendChild(createBoard(board1));
+createGameBoard();
 
 const block = () => {
 	const blocks = document.getElementsByClassName("block");
