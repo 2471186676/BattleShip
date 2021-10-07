@@ -1,31 +1,14 @@
-const gameBoard = (size, belong) => {
-	let board = new Array(size);
-
-	const create = () => {
-		for (var i = 0; i < board.length; i++) {
-			board[i] = new Array(size);
-		}
-
-		for (let x = 0; x < size; x++) {
-			for (let y = 0; y < size; y++) {
-				board[x][y] = undefined;
-			}
-		}
-	};
-
-	return { board, belong, create, size };
-};
-
-const shipPart = () => {
+const shipPart = (x,y) => {
 	let hit = false;
 	let reveal = false;
-	return { hit, reveal };
+	return { hit, reveal, x, y };
 };
+
 
 const ship = (size, direction, x, y) => {
 	let body = [];
 	for (let i = 0; i < size; i++) {
-		body.push(shipPart());
+		body.push(shipPart(x[i],y[i]));
 	}
 
 	const getHit = (loc) => {
@@ -43,24 +26,34 @@ const ship = (size, direction, x, y) => {
 	return { body, direction, getHealth, getHit, x, y };
 };
 
-const updateBoard = (gameBoard, ship) =>{
-	let x = ship.x;
-	let y = ship.y
-	let direction = ship.direction;
-	let body = ship.body;
 
-	switch(direction){
-		case "row":
-			for(let i = 0; i < body.length; i++){
-				gameBoard.board[x-i][y] = body.length;
+const gameBoard = (size, belong) => {
+	let board = new Array(size);
+	let ships = [];
+
+	const createBoard = () => {
+		for (var i = 0; i < board.length; i++) {
+			board[i] = new Array(size);
+		}
+
+		for (let x = 0; x < size; x++) {
+			for (let y = 0; y < size; y++) {
+				board[x][y] = undefined;
 			}
-			break;
-		case "column":
-			for(let i = 0; i < body.length; i++){
-				gameBoard.board[x][y-1] = body.length;
-			}
-			break;
+		}
+	};
+
+	const addShip = (size, direction, x, y) => {
+		let newShip = ship(size, direction, x, y);
+		ships.push(newShip);
 	}
-}
 
-export { gameBoard, ship, updateBoard };
+	return { board, belong, createBoard, size, addShip, ships};
+};
+
+
+
+
+
+
+export { gameBoard, ship };
