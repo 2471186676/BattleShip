@@ -14,29 +14,32 @@ const ship = (size, direction, x, y) => {
 		body.push(shipPart(x[i], y[i], ship));
 	}
 
-	const getHit = (loc) => {
-		body[loc].hit = true;
-	};
-
-	const getHealth = () => {
+	const checkHealth = () => {
 		let health = 0;
 		body.forEach((body) => {
 			if (body.hit == false) health++;
 		});
+		if (health == 0) {
+			console.log("sunk");
+			body.forEach((body) => {
+				body.reveal = true;
+			});
+		}
 		return health;
 	};
 
-	return { body, direction, getHealth, getHit, x, y };
+	return { body, direction, checkHealth, x, y };
 };
 
 const gameBoard = (size, belong) => {
 	let board = new Array(size);
 	let ships = [];
-
+	let hitLocation = [];
 	for (var i = 0; i < board.length; i++) {
 		board[i] = new Array(size);
 	}
 
+	// set all blocks into undefined
 	const resetBoard = () => {
 		for (let x = 0; x < size; x++) {
 			for (let y = 0; y < size; y++) {
@@ -45,6 +48,7 @@ const gameBoard = (size, belong) => {
 		}
 	};
 
+	// add new ship to ships array
 	const addShip = (size, direction, x, y) => {
 		// x & y is an array and length == size
 		let isEmpty = true;
@@ -65,6 +69,7 @@ const gameBoard = (size, belong) => {
 		updateBoard();
 	};
 
+	// add ship part to block
 	const updateBoard = () => {
 		ships.forEach((ship) => {
 			ship.body.forEach((part) => {
@@ -90,7 +95,24 @@ const gameBoard = (size, belong) => {
 		updateBoard();
 	};
 
-	return { board, belong, size, addShip, resetBoard, removeShip };
+	const hit = (location) => {
+		hitLocation.push(location);
+		let splitLocation = location.split("-");
+		let x = splitLocation[0];
+		let y = splitLocation[1];
+
+		if (board[x][y] != undefined) {
+			board[x][y].hit = true;
+			ships.forEach((ship) => {
+				ship.checkHealth();
+			});
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	return { board, belong, size, addShip, resetBoard, removeShip, hit };
 };
 
-export { gameBoard, ship };
+export { gameBoard };
