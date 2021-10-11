@@ -2,9 +2,30 @@
 <html>
     <head>
         <title>Battle_Ship</title>
+        <link href="global.css" rel="stylesheet">
     </head>
 
     <body>
-        <p>asd</p>
+        <div id="header">
+            <input type="checkbox" id="dir">row</input>
+            
+            <select name="action" id="action">
+                <option value="remove">Remove</option>
+                <option value="hit">Hit</option>
+                <option value="place">Place</option>
+              </select>
+
+            <input type="radio" name="type" class="type" value=2 checked="true">2</input>
+            <input type="radio" name="type" class="type" value=3 >3</input>
+            <input type="radio" name="type" class="type" value=4 >4</input>
+            <input type="radio" name="type" class="type" value=5 >5</input>
+        </div>
+
+        <div id="gameBoard1">
+
+        </div>
+
     </body>
+
+    <script src="bundle.js"></script>
 </html>
